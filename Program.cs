@@ -1,11 +1,24 @@
+using DotNetEnv;
+using FoodHub.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+//Loading variables from .env file
+Env.Load();
 // Add services to the container.
+builder.Services.AddDbContext<RestaurantContext>(options =>
+{
+    options.UseSqlServer(Environment.GetEnvironmentVariable("DEFAULTCONNECTION"));
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+
 
 var app = builder.Build();
 
