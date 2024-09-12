@@ -15,16 +15,16 @@ namespace FoodHub.Data.Repository
 
         public async Task AddUserAsync(User user)
         {
-            await _context.Customer.AddAsync(user);
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteUserAsync(int userId)
         {
-            var user = await _context.Customer.FindAsync(userId);
+            var user = await _context.Users.FindAsync(userId);
             if (user != null) 
             {
-                _context.Customer.Remove(user);
+                _context.Users.Remove(user);
             }
             await _context.SaveChangesAsync();
 
@@ -32,20 +32,20 @@ namespace FoodHub.Data.Repository
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            var userList = await _context.Customer.ToListAsync();
+            var userList = await _context.Users.ToListAsync();
             return userList;
         }
 
         public async Task<User> GetUserByIdAsync(int userId)
         {
-            var user = await _context.Customer.FindAsync(userId);
+            var user = await _context.Users.FindAsync(userId);
 
             return user; 
         }
 
         public async Task UpdateUserAsync(User user)
         {
-            _context.Customer.Update(user);
+            _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
         }

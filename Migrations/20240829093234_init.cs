@@ -12,22 +12,6 @@ namespace FoodHub.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Customer",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
-                    UserEmail = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    UserPhoneNumber = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customer", x => x.UserId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Menu",
                 columns: table => new
                 {
@@ -51,11 +35,28 @@ namespace FoodHub.Migrations
                     TableId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TableSeats = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TableNumber = table.Column<int>(type: "int", nullable: false)
+                    TableNumber = table.Column<int>(type: "int", nullable: false),
+                    IsAwailable = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Restaurant", x => x.TableId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
+                    UserEmail = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    UserPhoneNumber = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,16 +75,16 @@ namespace FoodHub.Migrations
                 {
                     table.PrimaryKey("PK_Booking", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_Booking_Customer_Fk_UserId",
-                        column: x => x.Fk_UserId,
-                        principalTable: "Customer",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Booking_Restaurant_Fk_TableId",
                         column: x => x.Fk_TableId,
                         principalTable: "Restaurant",
                         principalColumn: "TableId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Booking_Users_Fk_UserId",
+                        column: x => x.Fk_UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -108,10 +109,10 @@ namespace FoodHub.Migrations
                 name: "Menu");
 
             migrationBuilder.DropTable(
-                name: "Customer");
+                name: "Restaurant");
 
             migrationBuilder.DropTable(
-                name: "Restaurant");
+                name: "Users");
         }
     }
 }

@@ -93,6 +93,9 @@ namespace FoodHub.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TableId"));
 
+                    b.Property<bool>("IsAwailable")
+                        .HasColumnType("bit");
+
                     b.Property<int>("TableNumber")
                         .HasColumnType("int");
 
@@ -115,13 +118,13 @@ namespace FoodHub.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
 
                     b.Property<string>("UserEmail")
                         .IsRequired()
@@ -130,24 +133,24 @@ namespace FoodHub.Migrations
 
                     b.Property<string>("UserPhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
+                        .HasMaxLength(75)
+                        .HasColumnType("nvarchar(75)");
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Customer", (string)null);
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("FoodHub.Model.Booking", b =>
                 {
                     b.HasOne("FoodHub.Model.Table", "Table")
-                        .WithMany()
+                        .WithMany("Bookings")
                         .HasForeignKey("Fk_TableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FoodHub.Model.User", "User")
-                        .WithMany()
+                        .WithMany("Bookings")
                         .HasForeignKey("Fk_UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -155,6 +158,16 @@ namespace FoodHub.Migrations
                     b.Navigation("Table");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("FoodHub.Model.Table", b =>
+                {
+                    b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("FoodHub.Model.User", b =>
+                {
+                    b.Navigation("Bookings");
                 });
 #pragma warning restore 612, 618
         }

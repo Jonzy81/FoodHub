@@ -8,7 +8,8 @@ namespace FoodHub.Model
         public int TableId { get; set; }
         public string TableSeats { get; set; }
         public int TableNumber { get; set; }
-        ICollection<Booking> Bookings { get; set; }
+        public bool IsAwailable { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
 
     }
 }

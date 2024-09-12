@@ -7,18 +7,18 @@ namespace FoodHub.Model
         [Key]
         public int UserId { get; set; }
         [Required]
-        [MaxLength(25)]
+        [MaxLength(75)]
         public string FirstName { get; set; }
         [Required]
-        [MaxLength(25)]
+        [MaxLength(75)]
         public string LastName { get; set; }
         [Required]
         [MaxLength(255)]
         public string UserEmail { get; set; }
         [Required]
-        [MaxLength(25)]
+        [MaxLength(75)]
         public string UserPhoneNumber { get; set; }       
 
-        ICollection<Booking> bookings { get; set; }
+        public ICollection<Booking> Bookings { get; set; }
     }
 }
