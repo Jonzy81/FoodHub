@@ -7,7 +7,7 @@ namespace FoodHub.Data.Repository.IRepository
         Task<IEnumerable<MenuItem>> GetAllMenuItemsAsync();
         Task<MenuItem> GetMenuItemByIdAsync(int menuItemId);
         Task AddMenuItemAsync(MenuItem menuItem);
-        Task UpdateMenuItem(MenuItem menuItem);
+        Task UpdateMenuItemAsync(MenuItem menuItem);
         Task DeleteMenuItemAsync(int menuItemId);
     }
 }

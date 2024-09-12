@@ -5,7 +5,7 @@ namespace FoodHub.Services.IServices
 {
     public interface IMenuItemService
     {
-        Task<IEnumerable<MenuItem>> GetAllMenuItemsAsync();
+        Task<IEnumerable<MenuItemDto>> GetAllMenuItemsAsync();
         Task<MenuItemDto>GetMenuItemByIdAsync(int menuItemId);
         Task AddMenuItemAsync(MenuItemDto menuItem);
         Task UpdateMenuItemAsync(MenuItemDto menuItem);

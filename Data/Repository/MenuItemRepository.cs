@@ -35,7 +35,7 @@ namespace FoodHub.Data.Repository
                 await _context.SaveChangesAsync();
             }
         }
-        public async Task UpdateMenuItem(MenuItem menuItem)
+        public async Task UpdateMenuItemAsync(MenuItem menuItem)
         {
             _context.MenuItems.Update(menuItem);
             await _context.SaveChangesAsync();
