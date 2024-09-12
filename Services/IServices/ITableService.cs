@@ -4,7 +4,7 @@ namespace FoodHub.Services.IServices
 {
     public interface ITableService
     {
-        Task<IEnumerable<TableDto>> GetAlltablesAsync();
+        Task<IEnumerable<TableDto>> GetAllTablesAsync();
         Task<TableDto> GetTablebyIdAsync(int tableId);
         Task AddTableAsync(TableDto table);
         Task UpdatetableAsync(TableDto table);
