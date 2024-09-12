@@ -9,6 +9,6 @@ namespace FoodHub.Services.IServices
         Task<MenuItemDto>GetMenuItemByIdAsync(int menuItemId);
         Task AddMenuItemAsync(MenuItemDto menuItem);
         Task UpdateMenuItemAsync(MenuItemDto menuItem);
-        Task DeleteMenuItem(int menuItemId);
+        Task DeleteMenuItemAsync(int menuItemId);
     }
 }

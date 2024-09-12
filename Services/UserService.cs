@@ -13,7 +13,7 @@ namespace FoodHub.Services
         {
             _userRepository = userRepository;
         }
-
+        //adds a new User 
         public async Task AddUserAsync(UserDto user)
         {
             var newUser = new User
@@ -25,7 +25,7 @@ namespace FoodHub.Services
             };
             await _userRepository.AddUserAsync(newUser);
         }
-
+        //delete user by id 
         public async Task DeleteUserAsync(int userId)
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
@@ -37,7 +37,7 @@ namespace FoodHub.Services
             }
             await _userRepository.DeleteUserAsync(userId);
         }
-
+        //retrieve a List of all users 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
             var userList = await _userRepository.GetAllUsersAsync();
@@ -50,7 +50,7 @@ namespace FoodHub.Services
                 UserPhoneNumber= x.UserPhoneNumber
             }).ToList();
         }
-
+        //Get all user by id
         public async Task<UserDto> GetUserByIdAsync(int userId)
         {
             var user = await _userRepository.GetUserByIdAsync(userId);

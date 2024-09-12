@@ -12,20 +12,24 @@ namespace FoodHub.Data.Repository
         {
             _context = context;
         }
+        //Retrieves a list of all menu items in the database
         public async Task<IEnumerable<MenuItem>> GetAllMenuItemsAsync()
         {
             return await _context.MenuItems.ToListAsync();
         }
+
+        //retrieves a specific menu item by its ID 
         public async Task<MenuItem> GetMenuItemByIdAsync(int menuItemId)
         {
-            return await _context.MenuItems.FindAsync(menuItemId);
+            return await _context.MenuItems.FindAsync(menuItemId); //The corresponding menuItem entity or null if not found
         }
+        //Adds a new menu item to the database
         public async Task AddMenuItemAsync(MenuItem menuItem)
         {
             await _context.MenuItems.AddAsync(menuItem);
             await _context.SaveChangesAsync();
         }
-
+        //deletes a specific menu item from the database by its ID 
         public async Task DeleteMenuItemAsync(int menuItemId)
         {
             var menuItem = await _context.MenuItems.FindAsync(menuItemId);
@@ -35,6 +39,7 @@ namespace FoodHub.Data.Repository
                 await _context.SaveChangesAsync();
             }
         }
+        //Updates an existing menu item to the database
         public async Task UpdateMenuItemAsync(MenuItem menuItem)
         {
             _context.MenuItems.Update(menuItem);
