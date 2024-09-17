@@ -51,7 +51,7 @@ namespace FoodHub.Data.Repository
 
         //Checks if a specific table is available on a given date or time
         //And correctly returns true if table is awailable and false if its booked 
-        public async Task<bool> IsTableAvailable(int tableId, DateOnly date, TimeOnly time)
+        public async Task<bool> IsTableAvailableAsync(int tableId, DateOnly date, TimeOnly time)
         {
             return !await _context.Bookings.AnyAsync(b =>       //Use of ! before await to invert true operations true when booking exists and false when it doesnt 
                 b.Fk_TableId == tableId &&  //check if any booking exists for the same table 

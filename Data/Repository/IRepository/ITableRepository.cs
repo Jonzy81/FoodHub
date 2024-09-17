@@ -9,6 +9,6 @@ namespace FoodHub.Data.Repository.IRepository
         Task AddtableAsync(Table table);
         Task UpdateTableAsync(Table table);
         Task DeletetableAsync(int tableId);
-        Task<bool> IsTableAvailable(int tableId, DateOnly date, TimeOnly time);
+        Task<bool> IsTableAvailableAsync(int tableId, DateOnly date, TimeOnly time);
     }
 }

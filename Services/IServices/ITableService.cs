@@ -7,7 +7,7 @@ namespace FoodHub.Services.IServices
         Task<IEnumerable<TableDto>> GetAllTablesAsync();
         Task<TableDto> GetTablebyIdAsync(int tableId);
         Task AddTableAsync(TableDto table);
-        Task UpdatetableAsync(TableDto table);
+        Task UpdatetableAsync(TableDto tableDto);
         Task DeleteTableAsync(int tableId);
         Task<bool> IsTableAvailableAsync(int tableId, DateOnly date, TimeOnly time);
     }

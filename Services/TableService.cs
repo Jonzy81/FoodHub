@@ -28,9 +28,9 @@ namespace FoodHub.Services
             await _tableRepository.AddtableAsync(table);
         }
 
-        public Task DeleteTableAsync(int tableId)
+        public async Task DeleteTableAsync(int tableId)
         {
-            throw new NotImplementedException();
+            await _tableRepository.DeletetableAsync(tableId);
         }
 
         //Retrieves all tables
@@ -63,14 +63,22 @@ namespace FoodHub.Services
             };
         }
 
-        public Task<bool> IsTableAvailableAsync(int tableId, DateOnly date, TimeOnly time)
+        //Checks if table is available in any given time
+        public async Task<bool> IsTableAvailableAsync(int tableId, DateOnly date, TimeOnly time)
         {
-            throw new NotImplementedException();
+            return await _tableRepository.IsTableAvailableAsync(tableId, date, time);
         }
 
-        public Task UpdatetableAsync(TableDto table)
+        public async Task UpdatetableAsync(TableDto tableDto)
         {
-            throw new NotImplementedException();
+            var table = new Table
+            {
+                TableId = tableDto.TableId,
+                TableSeats = tableDto.TableSeats,
+                TableNumber = tableDto.TableNumber,
+                IsAwailable = tableDto.IsAwailable,
+            };
+            await _tableRepository.UpdateTableAsync(table);
         }
     }
 }
