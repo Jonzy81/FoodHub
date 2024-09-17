@@ -10,9 +10,11 @@ namespace FoodHub.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
-        public BookingController(IBookingService bookingService)
+        private readonly ITableService _tableService;
+        public BookingController(IBookingService bookingService, ITableService tableService)
         {
             _bookingService = bookingService;
+            _tableService = tableService;
         }
 
         // GET: api/Booking
@@ -44,7 +46,15 @@ namespace FoodHub.Controllers
         {
             if (bookingDto == null)
             {
-                return BadRequest();
+                return BadRequest("Invalid booking details provided");
+            }
+            
+            //Check if the table is available for the given date and time 
+            bool isTableAvailable = await _tableService.IsTableAvailableAsync(bookingDto.TableID, bookingDto.BookingDate, bookingDto.BookingTime);
+
+            if (!isTableAvailable)
+            {
+                return BadRequest("The selected table is not available at the specific date and time.");
             }
 
             await _bookingService.AddBookingAsync(bookingDto);
