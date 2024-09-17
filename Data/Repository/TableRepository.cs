@@ -60,6 +60,18 @@ namespace FoodHub.Data.Repository
             );
         }
 
+        // Retrieves all available tables on a specific date and time
+        public async Task<IEnumerable<Table>> GetAvailableTablesAsync(DateOnly date, TimeOnly time)
+        {
+            var bookedTables = await _context.Bookings
+                .Where(b => b.BookingDate == date && b.BookingTime == time)
+                .Select(b => b.Fk_TableId)
+                .ToListAsync();
+
+            return await _context.Tables
+                .Where(t => !bookedTables.Contains(t.TableId))
+                .ToListAsync();
+        }
 
     }
 }

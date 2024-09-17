@@ -80,5 +80,19 @@ namespace FoodHub.Services
             };
             await _tableRepository.UpdateTableAsync(table);
         }
+
+        //Retrieves all specific tables on a specific time and date 
+        public async Task<IEnumerable<TableDto>> GetAvailableTablesAsync(DateOnly date, TimeOnly time)
+        {
+            var availableTables = await _tableRepository.GetAvailableTablesAsync(date, time);
+            return availableTables.Select(t => new TableDto
+            {
+                TableId = t.TableId,
+                TableSeats = t.TableSeats,
+                TableNumber = t.TableNumber,
+                IsAwailable = t.IsAwailable
+            }).ToList();
+        }
+    }
     }
 }
