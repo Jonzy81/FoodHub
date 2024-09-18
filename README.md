@@ -13,7 +13,7 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
 ---
 
 ## ER-Diagram
-![ER-Diagram]()
+![ER-Diagram](https://github.com/Jonzy81/FoodHub/blob/master/image(1).png)
 
 ## User Endpoints
 
