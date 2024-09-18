@@ -25,12 +25,26 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
 
 - **POST /api/User**  
   Creates a new user.  
-  **Parameters**: `firstName`, `lastName`, `email`, `userPhoneNumber`.
+  - **Request Body**:
+  ```json
+  {
+  "userId": 1,
+  "firstName": "Thomas",
+  "lastName": "Andersson",
+  "email": "Tandersson@email.com",
+  "userPhoneNumber": "+46782847437437"
+}
 
 - **PUT /api/User/{id}**  
   Updates an existing user by ID.  
-  **Parameters**: `firstName`, `lastName`, `email`, `userPhoneNumber`.
-
+  ```json
+  {
+  "userId": 1,
+  "firstName": "xxxxx",
+  "lastName": "xxxxxxx",
+  "email": "xxxxxxxxxx@xxxxxxxx.com",
+  "userPhoneNumber": "xxxxxxxxxxxxxxx"
+  }
 - **DELETE /api/User/{id}**  
   Deletes a user by ID.
 
@@ -45,12 +59,30 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
   Retrieves a specific booking by ID.
 
 - **POST /api/Booking**  
-  Creates a new booking.  
-  **Parameters**: `bookingDate`, `bookingTime`, `numberOfSeats`, `userId`, `tableId`.
+  Creates a new booking.
+  - **Request Body**:
+   ```json
+   {
+    "bookingId": 0,
+    "bookingDate": "2024-11-14",
+    "bookingTime": "20:15:00",
+    "numberOfSeats": 4,
+    "userId": 1,
+    "tableId": 1
+   }
 
 - **PUT /api/Booking/{id}**  
   Updates an existing booking by ID.  
-  **Parameters**: `bookingDate`, `bookingTime`, `numberOfSeats`, `userId`, `tableId`.
+   - **Request Body**:
+   ```json
+   {
+    "bookingId": 0,
+    "bookingDate": "2024-11-14",
+    "bookingTime": "20:15:00",
+    "numberOfSeats": 4,
+    "userId": 1,
+    "tableId": 1
+   }
 
 - **DELETE /api/Booking/{id}**  
   Deletes a booking by ID.
@@ -67,11 +99,25 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
 
 - **POST /api/Table**  
   Adds a new table.  
-  **Parameters**: `tableSeats`, `tableNumber`, `isAvailable`.
+  - **Request Body**:
+   ```json
+   {
+  "tableId": 0,
+  "tableSeats": "string",
+  "tableNumber": 0,
+  "isAwailable": true
+}
 
 - **PUT /api/Table/{id}**  
   Updates an existing table by ID.  
-  **Parameters**: `tableSeats`, `tableNumber`, `isAvailable`.
+   - **Request Body**:
+   ```json
+   {
+  "tableId": 0,
+  "tableSeats": "string",
+  "tableNumber": 0,
+  "isAwailable": true
+}
 
 - **DELETE /api/Table/{id}**  
   Deletes a table by ID.
@@ -91,11 +137,29 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
 
 - **POST /api/Menu**  
   Adds a new menu item.  
-  **Parameters**: `menuType`, `menuName`, `description`, `price`, `isAvailable`.
+    - **Request Body**:
+   ```json
+   {
+  "menuId": 0,
+  "menuType": "string",
+  "menuName": "string",
+  "description": "string",
+  "price": 0,
+  "isAwailable": true
+}
 
 - **PUT /api/Menu/{id}**  
   Updates an existing menu item by ID.  
-  **Parameters**: `menuType`, `menuName`, `description`, `price`, `isAvailable`.
+      - **Request Body**:
+   ```json
+   {
+  "menuId": 0,
+  "menuType": "string",
+  "menuName": "string",
+  "description": "string",
+  "price": 0,
+  "isAwailable": true
+}
 
 - **DELETE /api/Menu/{id}**  
   Deletes a menu item by ID.
