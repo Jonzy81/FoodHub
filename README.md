@@ -13,7 +13,7 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
 ---
 
 ## ER-Diagram
-
+![ER-Diagram]()
 
 ## User Endpoints
 
