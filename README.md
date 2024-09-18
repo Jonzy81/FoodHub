@@ -28,22 +28,22 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
   - **Request Body**:
   ```json
   {
-  "userId": 1,
-  "firstName": "Thomas",
-  "lastName": "Andersson",
-  "email": "Tandersson@email.com",
-  "userPhoneNumber": "+46782847437437"
+  "userId": 0,
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "userPhoneNumber": "string"
 }
 
 - **PUT /api/User/{id}**  
   Updates an existing user by ID.  
   ```json
   {
-  "userId": 1,
-  "firstName": "xxxxx",
-  "lastName": "xxxxxxx",
-  "email": "xxxxxxxxxx@xxxxxxxx.com",
-  "userPhoneNumber": "xxxxxxxxxxxxxxx"
+  "userId": 0,
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "userPhoneNumber": "string"
   }
 - **DELETE /api/User/{id}**  
   Deletes a user by ID.
@@ -64,11 +64,11 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
    ```json
    {
     "bookingId": 0,
-    "bookingDate": "2024-11-14",
-    "bookingTime": "20:15:00",
-    "numberOfSeats": 4,
-    "userId": 1,
-    "tableId": 1
+    "bookingDate": "yyyy-mm-dd",
+    "bookingTime": "hh:mm:ss",
+    "numberOfSeats": 0,
+    "userId": 0,
+    "tableId": 0
    }
 
 - **PUT /api/Booking/{id}**  
@@ -77,11 +77,11 @@ This API provides CRUD operations for managing users, bookings, tables, and menu
    ```json
    {
     "bookingId": 0,
-    "bookingDate": "2024-11-14",
-    "bookingTime": "20:15:00",
-    "numberOfSeats": 4,
-    "userId": 1,
-    "tableId": 1
+    "bookingDate": "yyyy-mm-dd",
+    "bookingTime": "hh:mm:ss",
+    "numberOfSeats": 0,
+    "userId": 0,
+    "tableId": 0
    }
 
 - **DELETE /api/Booking/{id}**  
