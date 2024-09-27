@@ -1,7 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-#nullable disable
+
+
+
+
 
 namespace FoodHub.Migrations
 {
@@ -12,7 +14,23 @@ namespace FoodHub.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Menu",
+                name: "Admins",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Passwordhash = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admins", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MenuItems",
                 columns: table => new
                 {
                     MenuId = table.Column<int>(type: "int", nullable: false)
@@ -25,11 +43,11 @@ namespace FoodHub.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Menu", x => x.MenuId);
+                    table.PrimaryKey("PK_MenuItems", x => x.MenuId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Restaurant",
+                name: "Tables",
                 columns: table => new
                 {
                     TableId = table.Column<int>(type: "int", nullable: false)
@@ -40,7 +58,7 @@ namespace FoodHub.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Restaurant", x => x.TableId);
+                    table.PrimaryKey("PK_Tables", x => x.TableId);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,7 +78,7 @@ namespace FoodHub.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Booking",
+                name: "Bookings",
                 columns: table => new
                 {
                     BookingId = table.Column<int>(type: "int", nullable: false)
@@ -73,15 +91,15 @@ namespace FoodHub.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => x.BookingId);
+                    table.PrimaryKey("PK_Bookings", x => x.BookingId);
                     table.ForeignKey(
-                        name: "FK_Booking_Restaurant_Fk_TableId",
+                        name: "FK_Bookings_Tables_Fk_TableId",
                         column: x => x.Fk_TableId,
-                        principalTable: "Restaurant",
+                        principalTable: "Tables",
                         principalColumn: "TableId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Booking_Users_Fk_UserId",
+                        name: "FK_Bookings_Users_Fk_UserId",
                         column: x => x.Fk_UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
@@ -89,13 +107,13 @@ namespace FoodHub.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_Fk_TableId",
-                table: "Booking",
+                name: "IX_Bookings_Fk_TableId",
+                table: "Bookings",
                 column: "Fk_TableId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_Fk_UserId",
-                table: "Booking",
+                name: "IX_Bookings_Fk_UserId",
+                table: "Bookings",
                 column: "Fk_UserId");
         }
 
@@ -103,13 +121,16 @@ namespace FoodHub.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Booking");
+                name: "Admins");
 
             migrationBuilder.DropTable(
-                name: "Menu");
+                name: "Bookings");
 
             migrationBuilder.DropTable(
-                name: "Restaurant");
+                name: "MenuItems");
+
+            migrationBuilder.DropTable(
+                name: "Tables");
 
             migrationBuilder.DropTable(
                 name: "Users");

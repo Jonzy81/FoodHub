@@ -15,13 +15,13 @@ namespace FoodHub.Data
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-
+        public DbSet<Admin> Admins { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Table>().ToTable("Restaurant");
-            modelBuilder.Entity<MenuItem>().ToTable("Menu");
-            modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<Booking>().ToTable("Booking");
+            //modelBuilder.Entity<Table>().ToTable("Restaurant");
+            //modelBuilder.Entity<MenuItem>().ToTable("Menu");
+            //modelBuilder.Entity<User>().ToTable("Users");
+            //modelBuilder.Entity<Booking>().ToTable("Booking");
         }
     }
 }

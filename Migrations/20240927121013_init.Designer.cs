@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodHub.Migrations
 {
     [DbContext(typeof(RestaurantContext))]
-    [Migration("20240829093234_init")]
+    [Migration("20240927121013_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -24,6 +24,35 @@ namespace FoodHub.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("FoodHub.Model.Admin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Passwordhash")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Admins");
+                });
 
             modelBuilder.Entity("FoodHub.Model.Booking", b =>
                 {
@@ -54,7 +83,7 @@ namespace FoodHub.Migrations
 
                     b.HasIndex("Fk_UserId");
 
-                    b.ToTable("Booking", (string)null);
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("FoodHub.Model.MenuItem", b =>
@@ -85,7 +114,7 @@ namespace FoodHub.Migrations
 
                     b.HasKey("MenuId");
 
-                    b.ToTable("Menu", (string)null);
+                    b.ToTable("MenuItems");
                 });
 
             modelBuilder.Entity("FoodHub.Model.Table", b =>
@@ -108,7 +137,7 @@ namespace FoodHub.Migrations
 
                     b.HasKey("TableId");
 
-                    b.ToTable("Restaurant", (string)null);
+                    b.ToTable("Tables");
                 });
 
             modelBuilder.Entity("FoodHub.Model.User", b =>
@@ -141,7 +170,7 @@ namespace FoodHub.Migrations
 
                     b.HasKey("UserId");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("FoodHub.Model.Booking", b =>
