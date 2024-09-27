@@ -41,6 +41,7 @@ namespace FoodHub.Controllers
 
         // POST: api/Booking
         // Adds a new booking
+
         [HttpPost]
         public async Task<ActionResult> AddBooking([FromBody] BookingDto bookingDto)
         {
