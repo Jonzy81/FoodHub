@@ -39,6 +39,7 @@ namespace FoodHub.Controllers
         //Creates a new menu item 
         //A 201 Created response with the newly created menu item 
         [HttpPost]
+        //[Authorize] Demands JWT Token authorization for acces
         public async Task<ActionResult> AddMenuItem([FromBody] MenuItemDto menuItem)
         {
             if (menuItem == null)
