@@ -12,12 +12,10 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//Loading variables from .env file
 Env.Load();
-// Add services to the container.
 builder.Services.AddDbContext<RestaurantContext>(options =>
 {
-    options.UseSqlServer(Environment.GetEnvironmentVariable("DEFAULTCONNECTION"));  //Connectionstring from env file 
+    options.UseSqlServer(Environment.GetEnvironmentVariable("DEFAULTCONNECTION")); 
 });
 
 builder.Services.AddControllers();
@@ -35,8 +33,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-//Authentication
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)  
     .AddJwtBearer(options =>
     {
@@ -44,14 +41,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidateLifetime = true,    //Checks if token is valid 
+            ValidateLifetime = true,   
             ValidateIssuerSigningKey = true,
             ValidIssuer =Environment.GetEnvironmentVariable("JWT_ISSUER"),
             ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET")))   //Get data from config file
         };
     });   
-builder.Services.AddAuthorization();    //Autherization
+builder.Services.AddAuthorization();   
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(    
        );

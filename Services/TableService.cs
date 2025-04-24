@@ -16,7 +16,6 @@ namespace FoodHub.Services
             _tableRepository = tableRepository;
         }
 
-        //Adds a new table 
         public async Task AddTableAsync(TableDto tableDto)
         {
             var table = new Table
@@ -33,7 +32,6 @@ namespace FoodHub.Services
             await _tableRepository.DeletetableAsync(tableId);
         }
 
-        //Retrieves all tables
         public async Task<IEnumerable<TableDto>> GetAllTablesAsync()
         {
             var tables = await _tableRepository.GetAllTablesAsync();
@@ -46,7 +44,6 @@ namespace FoodHub.Services
             }).ToList();
         }
 
-        //Retrieve a specific table by its ID
         public async Task<TableDto> GetTablebyIdAsync(int tableId)
         {
             var table = await _tableRepository.GettableIdAsync(tableId);
@@ -63,7 +60,6 @@ namespace FoodHub.Services
             };
         }
 
-        //Checks if table is available in any given time
         public async Task<bool> IsTableAvailableAsync(int tableId, DateOnly date, TimeOnly time)
         {
             return await _tableRepository.IsTableAvailableAsync(tableId, date, time);
@@ -81,7 +77,6 @@ namespace FoodHub.Services
             await _tableRepository.UpdateTableAsync(table);
         }
 
-        //Retrieves all specific tables on a specific time and date 
         public async Task<IEnumerable<TableDto>> GetAvailableTablesAsync(DateOnly date, TimeOnly time, int numberOfSeats)
         {
             var availableTables = await _tableRepository.GetAvailableTablesAsync(date, time, numberOfSeats);

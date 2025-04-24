@@ -12,9 +12,6 @@ namespace FoodHub.Services
         {
             _menuItemrepository = menuItemrepository;
         }
-
-        //Retrieves all menu items from the repository 
-        //And returns a list of MenuItemDto representing all menu items 
         public async Task<IEnumerable<MenuItemDto>> GetAllMenuItemsAsync()
         {
             var menuItems = await _menuItemrepository.GetAllMenuItemsAsync();
@@ -29,16 +26,15 @@ namespace FoodHub.Services
             }).ToList();
         }
 
-        //Retrieves a specific menu item by its Id 
-        public async Task<MenuItemDto> GetMenuItemByIdAsync(int menuItemId) //menuItemId, the name of the menu item to retrieve
+        public async Task<MenuItemDto> GetMenuItemByIdAsync(int menuItemId) 
         {
             var menuItem = await _menuItemrepository.GetMenuItemByIdAsync(menuItemId);
             if (menuItem == null)
             {
-                return null;    //Returns null if not found
+                return null;    
             }
 
-            return new MenuItemDto  //A menuItemDto representing the menu item 
+            return new MenuItemDto 
             {
                 MenuId = menuItem.MenuId,
                 MenuType = menuItem.MenuType,
@@ -49,10 +45,9 @@ namespace FoodHub.Services
             };
 
         }
-        //Adds a new menu item to the repository
         public async Task AddMenuItemAsync(MenuItemDto menuItemDto)
         {
-            var menuItem = new MenuItem //The menu item data to add
+            var menuItem = new MenuItem 
             {
                 MenuType = menuItemDto.MenuType,
                 MenuName = menuItemDto.MenuName,
@@ -62,8 +57,6 @@ namespace FoodHub.Services
             };
             await _menuItemrepository.AddMenuItemAsync(menuItem);
         }
-        //Updates an existing menu item in the repository 
-        //the menu item data to update, including the ID 
         public async Task UpdateMenuItemAsync(MenuItemDto menuItemDto)
         {
             var menuItem = new MenuItem
@@ -78,7 +71,6 @@ namespace FoodHub.Services
 
             await _menuItemrepository.UpdateMenuItemAsync(menuItem);
         }
-        //Deletes a specific menu item from the repository by its Id
         public async Task DeleteMenuItemAsync(int menuItemId)
         {
             await _menuItemrepository.DeleteMenuItemAsync(menuItemId);

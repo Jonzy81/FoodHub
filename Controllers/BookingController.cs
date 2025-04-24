@@ -17,8 +17,6 @@ namespace FoodHub.Controllers
             _tableService = tableService;
         }
 
-        // GET: api/Booking
-        // Retrieves all bookings
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BookingDto>>> GetAllBookings()
         {
@@ -26,8 +24,6 @@ namespace FoodHub.Controllers
             return Ok(bookings);
         }
 
-        // GET: api/Booking/{id}
-        // Retrieves a specific booking by its ID
         [HttpGet("{id}")]
         public async Task<ActionResult<BookingDto>> GetBookingById(int id)
         {
@@ -39,9 +35,6 @@ namespace FoodHub.Controllers
             return Ok(booking);
         }
 
-        // POST: api/Booking
-        // Adds a new booking
-
         [HttpPost]
         public async Task<ActionResult> AddBooking([FromBody] BookingDto bookingDto)
         {
@@ -50,7 +43,6 @@ namespace FoodHub.Controllers
                 return BadRequest("Invalid booking details provided");
             }
             
-            //Check if the table is available for the given date and time 
             bool isTableAvailable = await _tableService.IsTableAvailableAsync(bookingDto.TableID, bookingDto.BookingDate, bookingDto.BookingTime);
 
             if (!isTableAvailable)
@@ -62,8 +54,6 @@ namespace FoodHub.Controllers
             return CreatedAtAction(nameof(GetBookingById), new { id = bookingDto.BookingId }, bookingDto);
         }
 
-        // PUT: api/Booking/{id}
-        // Updates an existing booking
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateBooking(int id, [FromBody] BookingDto bookingDto)
         {
@@ -76,8 +66,6 @@ namespace FoodHub.Controllers
             return NoContent();
         }
 
-        // DELETE: api/Booking/{id}
-        // Deletes a specific booking by its ID
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteBooking(int id)
         {

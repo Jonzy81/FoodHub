@@ -15,11 +15,9 @@ namespace FoodHub.Services
             _bookingRepository = bookingRepository;
         }
 
-        //Adds a new booking
         public async Task AddBookingAsync(BookingDto bookingDto)
         {
 
-            //Create a new booking entity from the BookingDto
             var booking = new Booking
             {
                 BookingDate = bookingDto.BookingDate,
@@ -29,7 +27,6 @@ namespace FoodHub.Services
                 Fk_TableId = bookingDto.TableID
             };
 
-            //Call the repository to add the new booking 
             await _bookingRepository.AddBookingAsync(booking);
         }
 
@@ -41,11 +38,9 @@ namespace FoodHub.Services
                 throw new KeyNotFoundException($"Booking with ID {bookingId} was not found");
             }
 
-            //Call repository to delete booking 
             await _bookingRepository.DeleteBookingAsync(bookingId);
         }
 
-        //Retrieve all bookings 
         public async Task<IEnumerable<BookingDto>> GetAllBookingsAsync()
         {
             var bookings = await _bookingRepository.GetAllBookingsAsync();
@@ -60,7 +55,6 @@ namespace FoodHub.Services
             }).ToList();
         }
 
-        //Retrieves all available tables on a specific time
         public async Task<IEnumerable<TableDto>> GetAvailableTablesAsync(DateOnly date, TimeOnly time)
         {
             var availableTables = await _bookingRepository.GetAvaliableTablesAsync(date, time);
@@ -73,7 +67,6 @@ namespace FoodHub.Services
             }).ToList();
         }
 
-        //retrieves a specific booking by its ID
         public async Task<BookingDto> GetBookingByIdAsync(int bookingId)
         {
             var booking = await _bookingRepository.GetBookingByIdAsync(bookingId);
@@ -93,7 +86,6 @@ namespace FoodHub.Services
             };
         }
 
-        //Updates an exisiting booking
         public async Task UpdateBookingAsync(BookingDto bookingDto)
         {
             var existingBooking = await _bookingRepository.GetBookingByIdAsync(bookingDto.BookingId);
@@ -102,14 +94,13 @@ namespace FoodHub.Services
                 throw new KeyNotFoundException($"Booking with ID {bookingDto.BookingId} was not found");
             }
 
-            //Update booking properties
+         
             existingBooking.BookingDate = bookingDto.BookingDate;
             existingBooking.BookingTime = bookingDto.BookingTime;
             existingBooking.NumberOfSeats = bookingDto.NumberOfSeats;
             existingBooking.Fk_UserId = bookingDto.UserId;
             existingBooking.Fk_TableId = bookingDto.TableID;
 
-            //save the changes to the repository 
             await _bookingRepository.UpdateBookingAsync(existingBooking);
         }
     }

@@ -13,7 +13,6 @@ namespace FoodHub.Services
         {
             _userRepository = userRepository;
         }
-        //adds a new User 
         public async Task<User> AddUserAsync(UserDto user)
         {
             var newUser = new User
@@ -27,19 +26,16 @@ namespace FoodHub.Services
 
             return newUser;
         }
-        //delete user by id 
         public async Task DeleteUserAsync(int userId)
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
 
             if (user == null) 
             {
-                //User not found
                 throw new Exception($"user with ID {userId} was not found");
             }
             await _userRepository.DeleteUserAsync(userId);
         }
-        //retrieve a List of all users 
         public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         {
             var userList = await _userRepository.GetAllUsersAsync();
@@ -52,7 +48,6 @@ namespace FoodHub.Services
                 UserPhoneNumber= x.UserPhoneNumber
             }).ToList();
         }
-        //Get all user by id
         public async Task<UserDto> GetUserByIdAsync(int userId)
         {
             var user = await _userRepository.GetUserByIdAsync(userId);
@@ -73,15 +68,12 @@ namespace FoodHub.Services
 
         public async Task UpdateUserAsync(UserDto user)
         {
-            //retrieve the existing user from repository 
             var existingUser = await _userRepository.GetUserByIdAsync(user.UserId);
 
-            //Check if it exists
             if (existingUser == null) 
             {
                 throw new KeyNotFoundException($"User with ID {user.UserId} was not found");
             }
-            //Update the user 
             existingUser.FirstName = user.FirstName;
             existingUser.LastName = user.LastName;
             existingUser.UserEmail = user.Email;

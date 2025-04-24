@@ -17,27 +17,25 @@ namespace FoodHub.Controllers
             _userService = userService;
         }
 
-        //Get all users
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetAllUsers()
         {
             var users = await _userService.GetAllUsersAsync();
-            return Ok(users);   //Returns ok with user 
+            return Ok(users);  
         }
 
-        //Get User by ID
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> GetUserById(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
             if (user == null)
             {
-                return NotFound();  //Returns not found
+                return NotFound(); 
             }
-            return Ok(user);    //Returns ok with user
+            return Ok(user);   
         }
 
-        //Create user
+        
         [HttpPost]
         [Route("CreateUser")]
         public async Task<ActionResult<User>> AddUser([FromBody] UserDto user)
@@ -50,14 +48,12 @@ namespace FoodHub.Controllers
             return CreatedAtAction(nameof(GetUserById), new { id = createdUser.UserId }, createdUser);
         }
 
-        //Update User
         [HttpPut("{id}")]
-        //[Route("UpdateUser")]
         public async Task<ActionResult> UpdateUser(int id, [FromBody] UserDto user)
         {
             if (user == null || user.UserId != id)
             {
-                return BadRequest(); //Returns bad request if input is invalid
+                return BadRequest();
             }
             try
             {
@@ -65,12 +61,11 @@ namespace FoodHub.Controllers
             }
             catch (KeyNotFoundException)
             {
-                return NotFound();  //returns 404 not found if user nit found
+                return NotFound();  
             }
-            return Ok(user);    //returns Ok if success
+            return Ok(user);   
         }
 
-        //Delete User
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteUser(int id)
         {
@@ -80,9 +75,9 @@ namespace FoodHub.Controllers
             }
             catch (KeyNotFoundException)
             {
-                return NotFound();  //Returns 404 if user doesnt exist
+                return NotFound(); 
             }
-            return Ok();    //Returns ok if success
+            return Ok();    
         }
     }
 }
