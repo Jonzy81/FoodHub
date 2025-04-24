@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodHub.Migrations
 {
     [DbContext(typeof(RestaurantContext))]
-    [Migration("20240927121013_init")]
+    [Migration("20250424153551_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -131,9 +131,8 @@ namespace FoodHub.Migrations
                     b.Property<int>("TableNumber")
                         .HasColumnType("int");
 
-                    b.Property<string>("TableSeats")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TableSeats")
+                        .HasColumnType("int");
 
                     b.HasKey("TableId");
 

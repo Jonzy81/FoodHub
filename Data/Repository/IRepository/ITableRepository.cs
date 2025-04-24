@@ -10,6 +10,8 @@ namespace FoodHub.Data.Repository.IRepository
         Task UpdateTableAsync(Table table);
         Task DeletetableAsync(int tableId);
         Task<bool> IsTableAvailableAsync(int tableId, DateOnly date, TimeOnly time);
-        Task<IEnumerable<Table>> GetAvailableTablesAsync(DateOnly date, TimeOnly time);
+        Task<IEnumerable<Table>> GetAvailableTablesAsync(DateOnly date, TimeOnly time, int numberOfSeats);
+        Task<IEnumerable<DateOnly>> GetAvailableDatesAsync(int numberOfSeats);
+        Task<IEnumerable<TimeOnly>> GetAvailableTimesAsync(DateOnly date, int numberOfSeats);
     }
 }

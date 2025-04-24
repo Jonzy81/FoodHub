@@ -23,17 +23,17 @@ builder.Services.AddDbContext<RestaurantContext>(options =>
 builder.Services.AddControllers();
 
 
-//Cors setup, this method only allows you to only allow this server 
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("LocalReact", policy =>
-//    {
-//        policy.WithOrigins("http://localhost:5175/")  //Change http adress for the correct one for your react app 
-//        .AllowAnyHeader()
-//        .AllowAnyMethod()
-//        .AllowCredentials();      //Used for text based information
-//    });
-//});
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173") 
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials();     
+    });
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 //Authentication
@@ -53,38 +53,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     });   
 builder.Services.AddAuthorization();    //Autherization
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(     //Adds jwt tokens to swagger manages authentication easier
-//    c =>
-//    {
-//        c.SwaggerDoc("v1", new OpenApiInfo { Title = "SQLicious API", Version = "v1" });
-//        // Define Bearer Authentication scheme for Swagger
-//        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-//        {
-//            Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-//            Name = "Authorization",
-//            In = ParameterLocation.Header,
-//            Type = SecuritySchemeType.Http,
-//            Scheme = "bearer"
-//        });
-//        // Apply Bearer authentication globally in Swagger UI
-//        c.AddSecurityRequirement(new OpenApiSecurityRequirement
-//    {
-//        {
-//            new OpenApiSecurityScheme
-//            {
-//                Reference = new OpenApiReference
-//                {
-//                    Type = ReferenceType.SecurityScheme,
-//                    Id = "Bearer"
-//                },
-//                Scheme = "oauth2",
-//                Name = "Bearer",
-//                In = ParameterLocation.Header,
-//            },
-//            new List<string>()
-//        }
-//    });
-//    }
+builder.Services.AddSwaggerGen(    
        );
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -101,15 +70,13 @@ builder.Services.AddScoped<JwtRepository>();
 
 var app = builder.Build();
 
-//app.UseCors("LocalReact");    //Uses for Cors
-
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

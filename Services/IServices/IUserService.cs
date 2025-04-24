@@ -1,4 +1,5 @@
-﻿using FoodHub.Model.Dtos;
+﻿using FoodHub.Model;
+using FoodHub.Model.Dtos;
 
 namespace FoodHub.Services.IServices
 {
@@ -6,7 +7,7 @@ namespace FoodHub.Services.IServices
     {
         Task<IEnumerable<UserDto>> GetAllUsersAsync();
         Task<UserDto> GetUserByIdAsync(int userId);
-        Task AddUserAsync(UserDto user);
+        Task<User> AddUserAsync(UserDto user);
         Task UpdateUserAsync(UserDto user);
         Task DeleteUserAsync(int userId);
     }

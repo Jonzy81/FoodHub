@@ -76,9 +76,12 @@ namespace FoodHub.Controllers
         //Get: api/Table/available
         //Checks for available tables on a specific date and time
         [HttpGet("available")]
-        public async Task<ActionResult<IEnumerable<TableDto>>> GetAvailableTables([FromQuery] DateOnly date, [FromQuery] TimeOnly time)
+        public async Task<ActionResult<IEnumerable<TableDto>>> GetAvailableTables(
+        [FromQuery] DateOnly date,
+        [FromQuery] TimeOnly time,
+        [FromQuery] int numberOfSeats)
         {
-            var availableTables = await _tableService.GetAvailableTablesAsync(date, time);
+            var availableTables = await _tableService.GetAvailableTablesAsync(date, time, numberOfSeats);
             return Ok(availableTables);
         }
 
@@ -89,6 +92,22 @@ namespace FoodHub.Controllers
         {
             var isAvailable = await _tableService.IsTableAvailableAsync(tableId, date, time);
             return Ok(isAvailable); // Returns true if available, false if not
+        }
+
+        [HttpGet("available-dates")]
+        public async Task<ActionResult<IEnumerable<DateOnly>>> GetAvailableDates([FromQuery] int numberOfSeats)
+        {
+            var availableDates = await _tableService.GetAvailableDatesAsync(numberOfSeats);
+            return Ok(availableDates);
+        }
+
+        [HttpGet("available-times")]
+        public async Task<ActionResult<IEnumerable<TimeOnly>>> GetAvailableTimes(
+        [FromQuery] DateOnly date,
+        [FromQuery] int numberOfSeats)
+        {
+            var times = await _tableService.GetAvailableTimesAsync(date, numberOfSeats);
+            return Ok(times);
         }
     }
 }

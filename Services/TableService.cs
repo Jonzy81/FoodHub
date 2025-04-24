@@ -82,9 +82,9 @@ namespace FoodHub.Services
         }
 
         //Retrieves all specific tables on a specific time and date 
-        public async Task<IEnumerable<TableDto>> GetAvailableTablesAsync(DateOnly date, TimeOnly time)
+        public async Task<IEnumerable<TableDto>> GetAvailableTablesAsync(DateOnly date, TimeOnly time, int numberOfSeats)
         {
-            var availableTables = await _tableRepository.GetAvailableTablesAsync(date, time);
+            var availableTables = await _tableRepository.GetAvailableTablesAsync(date, time, numberOfSeats);
             return availableTables.Select(t => new TableDto
             {
                 TableId = t.TableId,
@@ -92,6 +92,15 @@ namespace FoodHub.Services
                 TableNumber = t.TableNumber,
                 IsAwailable = t.IsAwailable
             }).ToList();
+        }
+        public async Task<IEnumerable<DateOnly>> GetAvailableDatesAsync(int numberOfSeats)
+        {
+            return await _tableRepository.GetAvailableDatesAsync(numberOfSeats);
+        }
+
+        public async Task<IEnumerable<TimeOnly>> GetAvailableTimesAsync(DateOnly date, int numberOfSeats)
+        {
+            return await _tableRepository.GetAvailableTimesAsync(date, numberOfSeats);
         }
     }
     

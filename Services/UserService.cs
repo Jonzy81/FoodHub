@@ -14,7 +14,7 @@ namespace FoodHub.Services
             _userRepository = userRepository;
         }
         //adds a new User 
-        public async Task AddUserAsync(UserDto user)
+        public async Task<User> AddUserAsync(UserDto user)
         {
             var newUser = new User
             {
@@ -24,6 +24,8 @@ namespace FoodHub.Services
                 UserPhoneNumber = user.UserPhoneNumber
             };
             await _userRepository.AddUserAsync(newUser);
+
+            return newUser;
         }
         //delete user by id 
         public async Task DeleteUserAsync(int userId)

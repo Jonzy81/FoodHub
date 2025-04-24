@@ -18,6 +18,7 @@ namespace FoodHub.Services
         //Adds a new booking
         public async Task AddBookingAsync(BookingDto bookingDto)
         {
+
             //Create a new booking entity from the BookingDto
             var booking = new Booking
             {

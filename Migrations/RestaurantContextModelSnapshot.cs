@@ -128,9 +128,8 @@ namespace FoodHub.Migrations
                     b.Property<int>("TableNumber")
                         .HasColumnType("int");
 
-                    b.Property<string>("TableSeats")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("TableSeats")
+                        .HasColumnType("int");
 
                     b.HasKey("TableId");
 

@@ -1,4 +1,5 @@
-﻿using FoodHub.Model.Dtos;
+﻿using FoodHub.Model;
+using FoodHub.Model.Dtos;
 using FoodHub.Services.IServices;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -39,14 +40,14 @@ namespace FoodHub.Controllers
         //Create user
         [HttpPost]
         [Route("CreateUser")]
-        public async Task<ActionResult> AddUser([FromBody] UserDto user)
+        public async Task<ActionResult<User>> AddUser([FromBody] UserDto user)
         {
             if (user == null)
             {
-                return BadRequest();    //Returns 400 if input is invalid
+                return BadRequest();    
             }
-            await _userService.AddUserAsync(user);
-            return CreatedAtAction(nameof(GetUserById), new { id = user.UserId }, user); //Returns created
+           var createdUser = await _userService.AddUserAsync(user);
+            return CreatedAtAction(nameof(GetUserById), new { id = createdUser.UserId }, createdUser);
         }
 
         //Update User

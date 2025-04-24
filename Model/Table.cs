@@ -6,7 +6,7 @@ namespace FoodHub.Model
     {
         [Key] 
         public int TableId { get; set; }
-        public string TableSeats { get; set; }
+        public int TableSeats { get; set; }
         public int TableNumber { get; set; }
         public bool IsAwailable { get; set; }
         public ICollection<Booking> Bookings { get; set; }
